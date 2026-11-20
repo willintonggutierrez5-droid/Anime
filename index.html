@@ -1,458 +1,614 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Principios de la Animación - Estudio Interactivo</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
-    body {
-      background-color: #0f172a;
-      color: #1e293b;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    .app-container {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      overflow: hidden;
-      width: 100%;
-      max-width: 1050px;
-      min-height: 550px;
-      display: flex;
-      flex-direction: column;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Principios de la Animación - Estudio Interactivo</title>
 
-    /* Cabecera Global */
-    .header-bar {
-      background: #1e293b;
-      color: white;
-      padding: 18px 24px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    .header-title h1 {
-      font-size: 19px;
-      font-weight: 700;
-    }
-    .header-title p {
-      font-size: 13px;
-      color: #94a3b8;
-    }
-    .nav-actions {
-      display: flex;
-      gap: 8px;
-    }
-    .btn-nav {
-      padding: 8px 14px;
-      background: #334155;
-      color: white;
-      border: 1px solid #475569;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: none;
-    }
-    .btn-nav:hover {
-      background: #475569;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
 
-    /* HOJA 1: Portada Explicativa */
-    .intro-view {
-      padding: 44px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      text-align: center;
-      background: #f8fafc;
-    }
-    .intro-badge {
-      background: #dbeafe;
-      color: #1d4ed8;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .intro-view h2 {
-      font-size: 26px;
-      color: #0f172a;
-      max-width: 680px;
-      line-height: 1.3;
-      margin-bottom: 14px;
-    }
-    .intro-lead {
-      font-size: 15px;
-      color: #475569;
-      max-width: 650px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      width: 100%;
-      max-width: 840px;
-      margin-bottom: 34px;
-    }
-    .principle-card {
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 20px 16px;
-      text-align: left;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-    }
-    .principle-icon {
-      font-size: 26px;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .principle-card h4 {
-      font-size: 15px;
-      color: #0f172a;
-      margin-bottom: 6px;
-    }
-    .principle-card p {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.45;
-    }
-    .btn-start {
-      padding: 14px 32px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
-      transition: all 0.2s;
-    }
-    .btn-start:hover {
-      background: #1d4ed8;
-      transform: translateY(-2px);
-    }
+body {
+  background-color: #0f172a;
+  color: #1e293b;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 30px 20px;
+}
 
-    /* HOJA 2: Selector de los 3 Emojis */
-    .selector-view {
-      padding: 40px 24px;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      text-align: center;
-      background: #f8fafc;
-    }
-    .selector-view h2 {
-      font-size: 22px;
-      color: #0f172a;
-      margin-bottom: 8px;
-    }
-    .selector-view p {
-      font-size: 14px;
-      color: #64748b;
-      margin-bottom: 32px;
-    }
-    .emoji-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      width: 100%;
-      max-width: 840px;
-    }
-    .emoji-choice-card {
-      background: white;
-      border: 2px solid #cbd5e1;
-      border-radius: 16px;
-      padding: 28px 20px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    }
-    .emoji-choice-card:hover {
-      transform: translateY(-6px);
-      border-color: #2563eb;
-      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
-    }
-    .big-emoji {
-      font-size: 66px;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .emoji-choice-card h3 {
-      font-size: 18px;
-      color: #1e293b;
-    }
-    .emoji-choice-card span {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.4;
-    }
-    .btn-select-pill {
-      margin-top: 8px;
-      padding: 8px 18px;
-      background: #eff6ff;
-      color: #2563eb;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: all 0.2s;
-    }
-    .emoji-choice-card:hover .btn-select-pill {
-      background: #2563eb;
-      color: white;
-    }
+.app-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  overflow: hidden;
+  width: 100%;
+  max-width: 1250px;
+  min-height: 650px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
 
-    /* HOJA 3: Estudio de Animación de 12 Fotogramas */
-    .studio-view {
-      display: none;
-      flex-direction: column;
-    }
-    .frames-section {
-      padding: 20px 24px;
-      background: #f8fafc;
-      border-bottom: 2px solid #e2e8f0;
-    }
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .section-header h2 {
-      font-size: 15px;
-      color: #0f172a;
-    }
-    .btn-reset {
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid #cbd5e1;
-      background: white;
-      border-radius: 6px;
-      cursor: pointer;
-      color: #475569;
-    }
-    .btn-reset:hover {
-      background: #e2e8f0;
-    }
+/* CABECERA */
 
-    .frames-scroll-container {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      scrollbar-width: thin;
-    }
-    .frame-card {
-      background: white;
-      border: 2px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 8px;
-      text-align: center;
-      min-width: 130px;
-      flex-shrink: 0;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    .frame-card.active-frame {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-    }
-    .frame-card canvas {
-      width: 114px;
-      height: 80px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .frame-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #334155;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 110px;
-    }
-    .order-controls {
-      display: flex;
-      gap: 4px;
-      width: 100%;
-      justify-content: center;
-    }
-    .btn-move {
-      padding: 2px 8px;
-      border: 1px solid #cbd5e1;
-      background: #f1f5f9;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 11px;
-      color: #334155;
-    }
-    .btn-move:hover:not(:disabled) {
-      background: #2563eb;
-      color: white;
-      border-color: #2563eb;
-    }
-    .btn-move:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
+.header-bar {
+  background: #1e293b;
+  color: white;
+  padding: 20px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
 
-    /* Reproductor Principal */
-    .player-section {
-      padding: 24px;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-    .player-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1e293b;
-    }
-    #mainPlayerCanvas {
-      width: 100%;
-      max-width: 620px;
-      height: 280px;
-      border: 2px solid #cbd5e1;
-      border-radius: 12px;
-      background: #ffffff;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    }
-    .controls-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      background: #f1f5f9;
-      padding: 12px 24px;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
-    }
-    .btn-play {
-      padding: 10px 22px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .btn-play:hover {
-      background: #1d4ed8;
-    }
-    .btn-play.paused {
-      background: #10b981;
-    }
-    .speed-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #334155;
-    }
+.header-title h1 {
+  font-size: 21px;
+  font-weight: 700;
+}
 
-    @media (max-width: 750px) {
-      .principles-grid,
-      .emoji-cards-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.header-title p {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-nav {
+  padding: 9px 15px;
+  background: #334155;
+  color: white;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: none;
+}
+
+.btn-nav:hover {
+  background: #475569;
+}
+
+/* HOJA 1: EXPLICACIÓN */
+
+.intro-view {
+  padding: 55px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.intro-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.intro-view h2 {
+  font-size: 29px;
+  color: #0f172a;
+  max-width: 750px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.intro-lead {
+  font-size: 16px;
+  color: #475569;
+  max-width: 850px;
+  line-height: 1.7;
+  margin-bottom: 35px;
+}
+
+/* CUADRÍCULA DE PRINCIPIOS */
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  max-width: 1050px;
+  margin-bottom: 38px;
+}
+
+.principle-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.principle-icon {
+  font-size: 30px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.principle-card h4 {
+  font-size: 16px;
+  color: #0f172a;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.principle-card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+}
+
+.btn-start {
+  padding: 15px 35px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(37,99,235,0.3);
+  transition: all 0.2s;
+}
+
+.btn-start:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* HOJA 2: SELECTOR */
+
+.selector-view {
+  padding: 55px 35px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.selector-view h2 {
+  font-size: 25px;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.selector-view > p {
+  font-size: 15px;
+  color: #64748b;
+  margin-bottom: 38px;
+  line-height: 1.6;
+}
+
+/* TARJETAS DE EMOJIS */
+
+.emoji-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 22px;
+  width: 100%;
+  max-width: 1050px;
+}
+
+.emoji-choice-card {
+  background: white;
+  border: 2px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 32px 24px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  height: 100%;
+  min-width: 0;
+}
+
+.emoji-choice-card:hover {
+  transform: translateY(-6px);
+  border-color: #2563eb;
+  box-shadow: 0 12px 24px rgba(37,99,235,0.15);
+}
+
+.big-emoji {
+  font-size: 72px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.emoji-choice-card h3 {
+  font-size: 20px;
+  color: #1e293b;
+}
+
+.emoji-choice-card span {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+}
+
+.btn-select-pill {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.emoji-choice-card:hover .btn-select-pill {
+  background: #2563eb;
+  color: white;
+}
+
+/* HOJA 3: ESTUDIO DE ANIMACIÓN */
+
+.studio-view {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* FOTOGRAMAS */
+
+.frames-section {
+  padding: 24px 28px;
+  background: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.btn-reset {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #475569;
+}
+
+.btn-reset:hover {
+  background: #e2e8f0;
+}
+
+.frames-scroll-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 5px 3px 12px;
+  scrollbar-width: thin;
+}
+
+.frame-card {
+  background: white;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 9px;
+  text-align: center;
+  min-width: 130px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.frame-card.active-frame {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+
+.frame-card canvas {
+  width: 114px;
+  height: 80px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.frame-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+}
+
+.order-controls {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-move {
+  padding: 3px 9px;
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+  color: #334155;
+}
+
+.btn-move:hover:not(:disabled) {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.btn-move:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* REPRODUCTOR PRINCIPAL */
+
+.player-section {
+  padding: 30px 24px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.player-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+#mainPlayerCanvas {
+  width: 100%;
+  max-width: 750px;
+  height: 340px;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  background: #f1f5f9;
+  padding: 14px 26px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-play {
+  padding: 11px 24px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-play:hover {
+  background: #1d4ed8;
+}
+
+.btn-play.paused {
+  background: #10b981;
+}
+
+.speed-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 750px) {
+  body {
+    padding: 12px;
+  }
+
+  .app-container {
+    min-height: 0;
+  }
+
+  .principles-grid,
+  .emoji-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+
+  .intro-view,
+  .selector-view {
+    padding: 35px 18px;
+  }
+
+  .intro-view h2 {
+    font-size: 24px;
+  }
+
+  .selector-view h2 {
+    font-size: 21px;
+  }
+
+  .header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #mainPlayerCanvas {
+    height: auto;
+    aspect-ratio: 620 / 280;
+  }
+
+  .frames-section {
+    padding: 18px 14px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 450px) {
+  .header-title h1 {
+    font-size: 18px;
+  }
+
+  .nav-actions {
+    flex-wrap: wrap;
+  }
+
+  .controls-bar {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .speed-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <div class="app-container">
-  <!-- Cabecera Global -->
+
+  <!-- CABECERA GLOBAL -->
+
   <div class="header-bar">
     <div class="header-title">
       <h1 id="mainTitle">🎞️ Laboratorio de Animación Secuencial</h1>
       <p id="mainSubtitle">Comprende cómo el movimiento nace de la secuencia de imágenes</p>
     </div>
+
     <div class="nav-actions">
       <button id="introBtn" class="btn-nav" onclick="goToIntro()">ℹ️ Explicación</button>
       <button id="backBtn" class="btn-nav" onclick="goToSelector()">&larr; Cambiar Elemento</button>
     </div>
   </div>
 
-  <!-- HOJA 1: Explicación Corta del Sentido de la Animación -->
+  <!-- HOJA 1: EXPLICACIÓN -->
+
   <div id="introView" class="intro-view">
+
     <span class="intro-badge">Fundamentos Visuales</span>
+
     <h2>¿Cómo cobra vida una imagen estática?</h2>
+
     <p class="intro-lead">
       La animación es un truco óptico que hace que veamos movimiento donde no lo hay. A partir de 12 cuadros en secuencia (con pequeñas modificaciones de forma/trajectoria/tiempo) conseguimos engañar al cerebro a que perciba cosas estáticas como si tuvieran peso, fuerza y naturalidad.
     </p>
 
     <div class="principles-grid">
+
       <div class="principle-card">
         <span class="principle-icon">📐</span>
         <h4>1. Estirar y Encoger</h4>
         <p>Hacemos que los objetos se deformen, bien sea por aceleración o impacto (fuego/salto). Nos da flexibilidad y fuerza.</p>
       </div>
+
       <div class="principle-card">
         <span class="principle-icon">〰️</span>
         <h4>2. Arcos y Planeo</h4>
         <p>Los movimientos naturales no son lineales. Siempre tienen una curvatura suave (hoja que cae con viento).</p>
       </div>
+
       <div class="principle-card">
         <span class="principle-icon">⏱️</span>
         <h4>3. Ritmo y Secuencia (FPS)</h4>
         <p>El orden de los cuadros y la velocidad por segundo definen si una acción se siente rápida, pesada o flotante.</p>
       </div>
+
     </div>
 
     <button class="btn-start" onclick="goToSelector()">Explorar Animaciones &rarr;</button>
+
   </div>
 
-  <!-- HOJA 2: Selección de los 3 Emojis -->
+  <!-- HOJA 2: SELECTOR -->
+
   <div id="selectorView" class="selector-view">
+
     <h2>Elige un elemento para analizar su movimiento</h2>
+
     <p>Cada figura refleja una física distinta en 12 fotogramas que podrás reorganizar</p>
 
     <div class="emoji-cards-grid">
-      <!-- Opción 1: Fuego -->
+
       <div class="emoji-choice-card" onclick="openEmojiStudio('fire')">
         <div class="big-emoji">🔥</div>
         <h3>Llama Danzante</h3>
@@ -460,7 +616,6 @@
         <div class="btn-select-pill">Ver 12 fotogramas &rarr;</div>
       </div>
 
-      <!-- Opción 2: Robot -->
       <div class="emoji-choice-card" onclick="openEmojiStudio('robot')">
         <div class="big-emoji">🤖</div>
         <h3>Salto Acrobático</h3>
@@ -468,322 +623,458 @@
         <div class="btn-select-pill">Ver 12 fotogramas &rarr;</div>
       </div>
 
-      <!-- Opción 3: Hoja de Otoño -->
       <div class="emoji-choice-card" onclick="openEmojiStudio('leaf')">
         <div class="big-emoji">🍂</div>
         <h3>Caída de Hoja</h3>
         <span>Refleja <strong>ligereza y arcos</strong>: planea en zigzag con el viento hasta posarse en el suelo.</span>
         <div class="btn-select-pill">Ver 12 fotogramas &rarr;</div>
       </div>
+
     </div>
   </div>
 
-  <!-- HOJA 3: Estudio de Animación de 12 Fotogramas -->
+  <!-- HOJA 3: ESTUDIO DE ANIMACIÓN -->
+
   <div id="studioView" class="studio-view">
+
     <div class="frames-section">
+
       <div class="section-header">
         <h2>🎞️ 12 Fotogramas (Usa &larr; &rarr; para reorganizar la secuencia a tu gusto)</h2>
         <button class="btn-reset" onclick="resetOrder()">↺ Restablecer orden original</button>
       </div>
+
       <div class="frames-scroll-container" id="framesGrid"></div>
+
     </div>
 
     <div class="player-section">
+
       <div class="player-title" id="playerHeading">🎬 Reproducción en Bucle</div>
+
       <canvas id="mainPlayerCanvas" width="620" height="280"></canvas>
-      
+
       <div class="controls-bar">
+
         <button id="playPauseBtn" class="btn-play">⏸ Pausar</button>
+
         <div class="speed-group">
           <label for="fpsSlider">Velocidad: <span id="fpsLabel">7</span> FPS</label>
           <input type="range" id="fpsSlider" min="2" max="18" value="7">
         </div>
+
       </div>
     </div>
+
   </div>
+
 </div>
 
 <script>
-  const emojiAnimations = {
-    fire: {
-      emoji: '🔥',
-      title: '🔥 Llama Danzante (12 Fotogramas)',
-      subtitle: 'Principio de Estirar y Encoger aplicado a la energía del fuego',
-      hasGround: true,
-      frames: [
-        { name: "1. Chispa",       x: 0.50, y: 0.78, scaleX: 0.7, scaleY: 0.7, rot: 0,   alpha: 1.0 },
-        { name: "2. Creciendo",    x: 0.50, y: 0.75, scaleX: 0.9, scaleY: 1.1, rot: -5,  alpha: 1.0 },
-        { name: "3. Brisa izq.",   x: 0.46, y: 0.72, scaleX: 0.85,scaleY: 1.25,rot: -15, alpha: 1.0 },
-        { name: "4. Estiramiento", x: 0.48, y: 0.68, scaleX: 0.8, scaleY: 1.45,rot: -8,  alpha: 1.0 },
-        { name: "5. Centro alto",  x: 0.50, y: 0.65, scaleX: 1.0, scaleY: 1.55,rot: 0,   alpha: 1.0 },
-        { name: "6. Llamarada",    x: 0.50, y: 0.62, scaleX: 1.35,scaleY: 1.65,rot: 4,   alpha: 1.0 },
-        { name: "7. Brisa der.",   x: 0.54, y: 0.68, scaleX: 0.85,scaleY: 1.35,rot: 16,  alpha: 1.0 },
-        { name: "8. Ondulación",   x: 0.52, y: 0.72, scaleX: 1.1, scaleY: 1.15,rot: 10,  alpha: 1.0 },
-        { name: "9. Contracción",  x: 0.50, y: 0.76, scaleX: 1.25,scaleY: 0.85,rot: -4,  alpha: 1.0 },
-        { name: "10. Rebote",      x: 0.49, y: 0.71, scaleX: 0.9, scaleY: 1.2, rot: -6,  alpha: 1.0 },
-        { name: "11. Calma",       x: 0.50, y: 0.75, scaleX: 0.95,scaleY: 1.0, rot: 2,   alpha: 1.0 },
-        { name: "12. Brasa",       x: 0.50, y: 0.78, scaleX: 0.8, scaleY: 0.8, rot: 0,   alpha: 1.0 }
-      ]
-    },
-    robot: {
-      emoji: '🤖',
-      title: '🤖 Salto Acrobático (12 Fotogramas)',
-      subtitle: 'Principio de Anticipación, Arco parabólico y Amortiguación',
-      hasGround: true,
-      frames: [
-        { name: "1. Posición",     x: 0.20, y: 0.76, scaleX: 1.0, scaleY: 1.0, rot: 0,   alpha: 1.0 },
-        { name: "2. Impulso",      x: 0.22, y: 0.80, scaleX: 1.3, scaleY: 0.7, rot: -5,  alpha: 1.0 },
-        { name: "3. Despegue",     x: 0.28, y: 0.62, scaleX: 0.8, scaleY: 1.3, rot: 15,  alpha: 1.0 },
-        { name: "4. Subiendo",     x: 0.35, y: 0.42, scaleX: 0.9, scaleY: 1.1, rot: 60,  alpha: 1.0 },
-        { name: "5. Giro 120°",    x: 0.43, y: 0.28, scaleX: 1.0, scaleY: 1.0, rot: 120, alpha: 1.0 },
-        { name: "6. Cima 180°",    x: 0.50, y: 0.22, scaleX: 1.1, scaleY: 1.1, rot: 180, alpha: 1.0 },
-        { name: "7. Giro 240°",    x: 0.58, y: 0.28, scaleX: 1.0, scaleY: 1.0, rot: 240, alpha: 1.0 },
-        { name: "8. Descenso",     x: 0.66, y: 0.45, scaleX: 0.9, scaleY: 1.15,rot: 310, alpha: 1.0 },
-        { name: "9. Casi toca",    x: 0.74, y: 0.65, scaleX: 0.85,scaleY: 1.25,rot: 350, alpha: 1.0 },
-        { name: "10. Aterrizaje",  x: 0.78, y: 0.81, scaleX: 1.4, scaleY: 0.65,rot: 0,   alpha: 1.0 },
-        { name: "11. Rebote",      x: 0.80, y: 0.73, scaleX: 0.95,scaleY: 1.05,rot: 0,   alpha: 1.0 },
-        { name: "12. Victoria",    x: 0.80, y: 0.76, scaleX: 1.0, scaleY: 1.0, rot: 0,   alpha: 1.0 }
-      ]
-    },
-    leaf: {
-      emoji: '🍂',
-      title: '🍂 Caída de Hoja (12 Fotogramas)',
-      subtitle: 'Principio de Movimiento Ondulatorio y Resistencia al Aire',
-      hasGround: true,
-      frames: [
-        { name: "1. Desprende",    x: 0.25, y: 0.16, scaleX: 1.0, scaleY: 1.0, rot: -15, alpha: 1.0 },
-        { name: "2. Planeo der.",  x: 0.42, y: 0.24, scaleX: 1.05,scaleY: 0.95,rot: 25,  alpha: 1.0 },
-        { name: "3. Curva der.",   x: 0.62, y: 0.32, scaleX: 1.0, scaleY: 1.0, rot: 45,  alpha: 1.0 },
-        { name: "4. Gira en aire", x: 0.68, y: 0.40, scaleX: 0.85,scaleY: 1.0, rot: 15,  alpha: 1.0 },
-        { name: "5. Planeo izq.",  x: 0.50, y: 0.47, scaleX: 1.05,scaleY: 0.95,rot: -25, alpha: 1.0 },
-        { name: "6. Curva izq.",   x: 0.30, y: 0.55, scaleX: 1.0, scaleY: 1.0, rot: -45, alpha: 1.0 },
-        { name: "7. Brisa suave",  x: 0.26, y: 0.62, scaleX: 0.9, scaleY: 1.0, rot: -10, alpha: 1.0 },
-        { name: "8. Vaivén der.",  x: 0.45, y: 0.68, scaleX: 1.0, scaleY: 1.0, rot: 30,  alpha: 1.0 },
-        { name: "9. Casi abajo",   x: 0.60, y: 0.74, scaleX: 1.0, scaleY: 0.95,rot: 18,  alpha: 1.0 },
-        { name: "10. Frenado",     x: 0.52, y: 0.78, scaleX: 1.05,scaleY: 0.9, rot: -12, alpha: 1.0 },
-        { name: "11. Toca suelo",  x: 0.48, y: 0.81, scaleX: 1.1, scaleY: 0.85,rot: 5,   alpha: 1.0 },
-        { name: "12. Reposo",      x: 0.48, y: 0.82, scaleX: 1.05,scaleY: 0.9, rot: 0,   alpha: 1.0 }
-      ]
+
+const emojiAnimations = {
+
+  fire: {
+    emoji: '🔥',
+    title: '🔥 Llama Danzante (12 Fotogramas)',
+    subtitle: 'Principio de Estirar y Encoger aplicado a la energía del fuego',
+    hasGround: true,
+
+    frames: [
+      { name: "1. Chispa", x: 0.50, y: 0.78, scaleX: 0.7, scaleY: 0.7, rot: 0, alpha: 1.0 },
+      { name: "2. Creciendo", x: 0.50, y: 0.75, scaleX: 0.9, scaleY: 1.1, rot: -5, alpha: 1.0 },
+      { name: "3. Brisa izq.", x: 0.46, y: 0.72, scaleX: 0.85, scaleY: 1.25, rot: -15, alpha: 1.0 },
+      { name: "4. Estiramiento", x: 0.48, y: 0.68, scaleX: 0.8, scaleY: 1.45, rot: -8, alpha: 1.0 },
+      { name: "5. Centro alto", x: 0.50, y: 0.65, scaleX: 1.0, scaleY: 1.55, rot: 0, alpha: 1.0 },
+      { name: "6. Llamarada", x: 0.50, y: 0.62, scaleX: 1.35, scaleY: 1.65, rot: 4, alpha: 1.0 },
+      { name: "7. Brisa der.", x: 0.54, y: 0.68, scaleX: 0.85, scaleY: 1.35, rot: 16, alpha: 1.0 },
+      { name: "8. Ondulación", x: 0.52, y: 0.72, scaleX: 1.1, scaleY: 1.15, rot: 10, alpha: 1.0 },
+      { name: "9. Contracción", x: 0.50, y: 0.76, scaleX: 1.25, scaleY: 0.85, rot: -4, alpha: 1.0 },
+      { name: "10. Rebote", x: 0.49, y: 0.71, scaleX: 0.9, scaleY: 1.2, rot: -6, alpha: 1.0 },
+      { name: "11. Calma", x: 0.50, y: 0.75, scaleX: 0.95, scaleY: 1.0, rot: 2, alpha: 1.0 },
+      { name: "12. Brasa", x: 0.50, y: 0.78, scaleX: 0.8, scaleY: 0.8, rot: 0, alpha: 1.0 }
+    ]
+  },
+
+  robot: {
+    emoji: '🤖',
+    title: '🤖 Salto Acrobático (12 Fotogramas)',
+    subtitle: 'Principio de Anticipación, Arco parabólico y Amortiguación',
+    hasGround: true,
+
+    frames: [
+      { name: "1. Posición", x: 0.20, y: 0.76, scaleX: 1.0, scaleY: 1.0, rot: 0, alpha: 1.0 },
+      { name: "2. Impulso", x: 0.22, y: 0.80, scaleX: 1.3, scaleY: 0.7, rot: -5, alpha: 1.0 },
+      { name: "3. Despegue", x: 0.28, y: 0.62, scaleX: 0.8, scaleY: 1.3, rot: 15, alpha: 1.0 },
+      { name: "4. Subiendo", x: 0.35, y: 0.42, scaleX: 0.9, scaleY: 1.1, rot: 60, alpha: 1.0 },
+      { name: "5. Giro 120°", x: 0.43, y: 0.28, scaleX: 1.0, scaleY: 1.0, rot: 120, alpha: 1.0 },
+      { name: "6. Cima 180°", x: 0.50, y: 0.22, scaleX: 1.1, scaleY: 1.1, rot: 180, alpha: 1.0 },
+      { name: "7. Giro 240°", x: 0.58, y: 0.28, scaleX: 1.0, scaleY: 1.0, rot: 240, alpha: 1.0 },
+      { name: "8. Descenso", x: 0.66, y: 0.45, scaleX: 0.9, scaleY: 1.15, rot: 310, alpha: 1.0 },
+      { name: "9. Casi toca", x: 0.74, y: 0.65, scaleX: 0.85, scaleY: 1.25, rot: 350, alpha: 1.0 },
+      { name: "10. Aterrizaje", x: 0.78, y: 0.81, scaleX: 1.4, scaleY: 0.65, rot: 0, alpha: 1.0 },
+      { name: "11. Rebote", x: 0.80, y: 0.73, scaleX: 0.95, scaleY: 1.05, rot: 0, alpha: 1.0 },
+      { name: "12. Victoria", x: 0.80, y: 0.76, scaleX: 1.0, scaleY: 1.0, rot: 0, alpha: 1.0 }
+    ]
+  },
+
+  leaf: {
+    emoji: '🍂',
+    title: '🍂 Caída de Hoja (12 Fotogramas)',
+    subtitle: 'Principio de Movimiento Ondulatorio y Resistencia al Aire',
+    hasGround: true,
+
+    frames: [
+      { name: "1. Desprende", x: 0.25, y: 0.16, scaleX: 1.0, scaleY: 1.0, rot: -15, alpha: 1.0 },
+      { name: "2. Planeo der.", x: 0.42, y: 0.24, scaleX: 1.05, scaleY: 0.95, rot: 25, alpha: 1.0 },
+      { name: "3. Curva der.", x: 0.62, y: 0.32, scaleX: 1.0, scaleY: 1.0, rot: 45, alpha: 1.0 },
+      { name: "4. Gira en aire", x: 0.68, y: 0.40, scaleX: 0.85, scaleY: 1.0, rot: 15, alpha: 1.0 },
+      { name: "5. Planeo izq.", x: 0.50, y: 0.47, scaleX: 1.05, scaleY: 0.95, rot: -25, alpha: 1.0 },
+      { name: "6. Curva izq.", x: 0.30, y: 0.55, scaleX: 1.0, scaleY: 1.0, rot: -45, alpha: 1.0 },
+      { name: "7. Brisa suave", x: 0.26, y: 0.62, scaleX: 0.9, scaleY: 1.0, rot: -10, alpha: 1.0 },
+      { name: "8. Vaivén der.", x: 0.45, y: 0.68, scaleX: 1.0, scaleY: 1.0, rot: 30, alpha: 1.0 },
+      { name: "9. Casi abajo", x: 0.60, y: 0.74, scaleX: 1.0, scaleY: 0.95, rot: 18, alpha: 1.0 },
+      { name: "10. Frenado", x: 0.52, y: 0.78, scaleX: 1.05, scaleY: 0.9, rot: -12, alpha: 1.0 },
+      { name: "11. Toca suelo", x: 0.48, y: 0.81, scaleX: 1.1, scaleY: 0.85, rot: 5, alpha: 1.0 },
+      { name: "12. Reposo", x: 0.48, y: 0.82, scaleX: 1.05, scaleY: 0.9, rot: 0, alpha: 1.0 }
+    ]
+  }
+
+};
+
+let currentKey = 'fire';
+let sequence = [];
+let currentFrameIndex = 0;
+let isPlaying = true;
+let animTimer = null;
+
+const introView = document.getElementById('introView');
+const selectorView = document.getElementById('selectorView');
+const studioView = document.getElementById('studioView');
+
+const introBtn = document.getElementById('introBtn');
+const backBtn = document.getElementById('backBtn');
+
+const mainTitle = document.getElementById('mainTitle');
+const mainSubtitle = document.getElementById('mainSubtitle');
+
+const framesGrid = document.getElementById('framesGrid');
+
+const mainCanvas = document.getElementById('mainPlayerCanvas');
+const mainCtx = mainCanvas.getContext('2d');
+
+const playPauseBtn = document.getElementById('playPauseBtn');
+const fpsSlider = document.getElementById('fpsSlider');
+const fpsLabel = document.getElementById('fpsLabel');
+
+/* NAVEGACIÓN */
+
+function goToIntro() {
+
+  if (animTimer) clearInterval(animTimer);
+
+  mainTitle.textContent = '🎞️ Laboratorio de Animación Secuencial';
+  mainSubtitle.textContent = 'Comprende cómo el movimiento nace de la secuencia de imágenes';
+
+  introBtn.style.display = 'none';
+  backBtn.style.display = 'none';
+
+  selectorView.style.display = 'none';
+  studioView.style.display = 'none';
+  introView.style.display = 'flex';
+}
+
+function goToSelector() {
+
+  if (animTimer) clearInterval(animTimer);
+
+  mainTitle.textContent = '🎭 Estudio de Animación con Emojis';
+  mainSubtitle.textContent = 'Selecciona un elemento para abrir su secuencia de 12 fotogramas';
+
+  introBtn.style.display = 'inline-block';
+  backBtn.style.display = 'none';
+
+  introView.style.display = 'none';
+  studioView.style.display = 'none';
+  selectorView.style.display = 'flex';
+}
+
+function openEmojiStudio(key) {
+
+  currentKey = key;
+
+  const data = emojiAnimations[key];
+
+  sequence = [...data.frames];
+  currentFrameIndex = 0;
+  isPlaying = true;
+
+  updatePlayButton();
+
+  mainTitle.textContent = data.title;
+  mainSubtitle.textContent = data.subtitle;
+
+  introBtn.style.display = 'inline-block';
+  backBtn.style.display = 'inline-block';
+
+  introView.style.display = 'none';
+  selectorView.style.display = 'none';
+  studioView.style.display = 'flex';
+
+  renderFramesUI();
+  drawMainFrame();
+  startLoop();
+}
+
+/* DIBUJAR EMOJIS */
+
+function renderEmojiPose(ctx, width, height, pose, baseSize) {
+
+  const data = emojiAnimations[currentKey];
+
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, width, height);
+
+  if (data.hasGround) {
+
+    const groundY = height * 0.86;
+
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = Math.max(2, width * 0.005);
+
+    ctx.beginPath();
+    ctx.moveTo(width * 0.06, groundY);
+    ctx.lineTo(width * 0.94, groundY);
+    ctx.stroke();
+  }
+
+  ctx.save();
+
+  ctx.globalAlpha = pose.alpha;
+
+  ctx.translate(width * pose.x, height * pose.y);
+
+  ctx.rotate((pose.rot * Math.PI) / 180);
+
+  ctx.scale(pose.scaleX, pose.scaleY);
+
+  ctx.font = `${baseSize}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  ctx.fillText(data.emoji, 0, 0);
+
+  ctx.restore();
+}
+
+/* CREAR FOTOGRAMAS */
+
+function renderFramesUI() {
+
+  framesGrid.innerHTML = '';
+
+  sequence.forEach((pose, index) => {
+
+    const card = document.createElement('div');
+
+    card.className = 'frame-card';
+
+    if (index === currentFrameIndex) {
+      card.classList.add('active-frame');
     }
-  };
 
-  let currentKey = 'fire';
-  let sequence = [];
-  let currentFrameIndex = 0;
-  let isPlaying = true;
-  let animTimer = null;
+    const thumbCanvas = document.createElement('canvas');
 
-  const introView = document.getElementById('introView');
-  const selectorView = document.getElementById('selectorView');
-  const studioView = document.getElementById('studioView');
-  const introBtn = document.getElementById('introBtn');
-  const backBtn = document.getElementById('backBtn');
-  const mainTitle = document.getElementById('mainTitle');
-  const mainSubtitle = document.getElementById('mainSubtitle');
-  const framesGrid = document.getElementById('framesGrid');
-  const mainCanvas = document.getElementById('mainPlayerCanvas');
-  const mainCtx = mainCanvas.getContext('2d');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const fpsSlider = document.getElementById('fpsSlider');
-  const fpsLabel = document.getElementById('fpsLabel');
+    thumbCanvas.width = 114;
+    thumbCanvas.height = 80;
 
-  // Navegación a Hoja 1 (Explicación)
-  function goToIntro() {
-    if (animTimer) clearInterval(animTimer);
-    mainTitle.textContent = '🎞️ Laboratorio de Animación Secuencial';
-    mainSubtitle.textContent = 'Comprende cómo el movimiento nace de la secuencia de imágenes';
-    introBtn.style.display = 'none';
-    backBtn.style.display = 'none';
-    selectorView.style.display = 'none';
-    studioView.style.display = 'none';
-    introView.style.display = 'flex';
-  }
+    const thumbCtx = thumbCanvas.getContext('2d');
 
-  // Navegación a Hoja 2 (Selector de 3 Emojis)
-  function goToSelector() {
-    if (animTimer) clearInterval(animTimer);
-    mainTitle.textContent = '🎭 Estudio de Animación con Emojis';
-    mainSubtitle.textContent = 'Selecciona un elemento para abrir su secuencia de 12 fotogramas';
-    introBtn.style.display = 'inline-block';
-    backBtn.style.display = 'none';
-    introView.style.display = 'none';
-    studioView.style.display = 'none';
-    selectorView.style.display = 'flex';
-  }
+    renderEmojiPose(thumbCtx, 114, 80, pose, 32);
 
-  // Navegación a Hoja 3 (Estudio de 12 Fotogramas)
-  function openEmojiStudio(key) {
-    currentKey = key;
-    const data = emojiAnimations[key];
-    sequence = [...data.frames];
-    currentFrameIndex = 0;
-    isPlaying = true;
-    updatePlayButton();
+    thumbCanvas.onclick = () => {
 
-    mainTitle.textContent = data.title;
-    mainSubtitle.textContent = data.subtitle;
-    introBtn.style.display = 'inline-block';
-    backBtn.style.display = 'inline-block';
-    introView.style.display = 'none';
-    selectorView.style.display = 'none';
-    studioView.style.display = 'flex';
+      isPlaying = false;
+      updatePlayButton();
 
-    renderFramesUI();
-    drawMainFrame();
-    startLoop();
-  }
+      currentFrameIndex = index;
 
-  function renderEmojiPose(ctx, width, height, pose, baseSize) {
-    const data = emojiAnimations[currentKey];
-
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, width, height);
-
-    if (data.hasGround) {
-      const groundY = height * 0.86;
-      ctx.strokeStyle = '#cbd5e1';
-      ctx.lineWidth = Math.max(2, width * 0.005);
-      ctx.beginPath();
-      ctx.moveTo(width * 0.06, groundY);
-      ctx.lineTo(width * 0.94, groundY);
-      ctx.stroke();
-    }
-
-    ctx.save();
-    ctx.globalAlpha = pose.alpha;
-    ctx.translate(width * pose.x, height * pose.y);
-    ctx.rotate((pose.rot * Math.PI) / 180);
-    ctx.scale(pose.scaleX, pose.scaleY);
-
-    ctx.font = `${baseSize}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(data.emoji, 0, 0);
-    ctx.restore();
-  }
-
-  function renderFramesUI() {
-    framesGrid.innerHTML = '';
-
-    sequence.forEach((pose, index) => {
-      const card = document.createElement('div');
-      card.className = 'frame-card';
-      if (index === currentFrameIndex) card.classList.add('active-frame');
-
-      const thumbCanvas = document.createElement('canvas');
-      thumbCanvas.width = 114;
-      thumbCanvas.height = 80;
-      const thumbCtx = thumbCanvas.getContext('2d');
-      renderEmojiPose(thumbCtx, 114, 80, pose, 32);
-
-      thumbCanvas.onclick = () => {
-        isPlaying = false;
-        updatePlayButton();
-        currentFrameIndex = index;
-        drawMainFrame();
-        highlightActiveCard();
-      };
-
-      const label = document.createElement('div');
-      label.className = 'frame-label';
-      label.textContent = pose.name;
-
-      const controls = document.createElement('div');
-      controls.className = 'order-controls';
-
-      const leftBtn = document.createElement('button');
-      leftBtn.className = 'btn-move';
-      leftBtn.innerHTML = '&larr;';
-      leftBtn.title = 'Mover a la izquierda';
-      leftBtn.disabled = index === 0;
-      leftBtn.onclick = () => moveFrame(index, -1);
-
-      const rightBtn = document.createElement('button');
-      rightBtn.className = 'btn-move';
-      rightBtn.innerHTML = '&rarr;';
-      rightBtn.title = 'Mover a la derecha';
-      rightBtn.disabled = index === sequence.length - 1;
-      rightBtn.onclick = () => moveFrame(index, 1);
-
-      controls.appendChild(leftBtn);
-      controls.appendChild(rightBtn);
-
-      card.appendChild(thumbCanvas);
-      card.appendChild(label);
-      card.appendChild(controls);
-      framesGrid.appendChild(card);
-    });
-  }
-
-  function highlightActiveCard() {
-    const cards = document.querySelectorAll('.frame-card');
-    cards.forEach((card, idx) => {
-      card.classList.toggle('active-frame', idx === currentFrameIndex);
-    });
-  }
-
-  function moveFrame(index, direction) {
-    const targetIndex = index + direction;
-    if (targetIndex < 0 || targetIndex >= sequence.length) return;
-    
-    const temp = sequence[index];
-    sequence[index] = sequence[targetIndex];
-    sequence[targetIndex] = temp;
-    
-    renderFramesUI();
-    drawMainFrame();
-  }
-
-  function resetOrder() {
-    sequence = [...emojiAnimations[currentKey].frames];
-    currentFrameIndex = 0;
-    renderFramesUI();
-    drawMainFrame();
-  }
-
-  function drawMainFrame() {
-    const pose = sequence[currentFrameIndex];
-    renderEmojiPose(mainCtx, mainCanvas.width, mainCanvas.height, pose, 85);
-
-    mainCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-    mainCtx.fillRect(14, 14, 175, 30);
-    mainCtx.fillStyle = '#ffffff';
-    mainCtx.font = '600 13px system-ui, sans-serif';
-    mainCtx.fillText(`Fotograma ${currentFrameIndex + 1}/12`, 24, 33);
-  }
-
-  function startLoop() {
-    if (animTimer) clearInterval(animTimer);
-    const fps = Number(fpsSlider.value);
-
-    animTimer = setInterval(() => {
-      if (!isPlaying) return;
       drawMainFrame();
       highlightActiveCard();
-      currentFrameIndex = (currentFrameIndex + 1) % sequence.length;
-    }, 1000 / fps);
-  }
+    };
 
-  function updatePlayButton() {
-    if (isPlaying) {
-      playPauseBtn.textContent = '⏸ Pausar';
-      playPauseBtn.classList.remove('paused');
-    } else {
-      playPauseBtn.textContent = '▶ Reproducir';
-      playPauseBtn.classList.add('paused');
-    }
-  }
+    const label = document.createElement('div');
 
-  playPauseBtn.addEventListener('click', () => {
-    isPlaying = !isPlaying;
-    updatePlayButton();
+    label.className = 'frame-label';
+    label.textContent = pose.name;
+
+    const controls = document.createElement('div');
+
+    controls.className = 'order-controls';
+
+    const leftBtn = document.createElement('button');
+
+    leftBtn.className = 'btn-move';
+    leftBtn.innerHTML = '&larr;';
+    leftBtn.title = 'Mover a la izquierda';
+    leftBtn.disabled = index === 0;
+
+    leftBtn.onclick = () => moveFrame(index, -1);
+
+    const rightBtn = document.createElement('button');
+
+    rightBtn.className = 'btn-move';
+    rightBtn.innerHTML = '&rarr;';
+    rightBtn.title = 'Mover a la derecha';
+    rightBtn.disabled = index === sequence.length - 1;
+
+    rightBtn.onclick = () => moveFrame(index, 1);
+
+    controls.appendChild(leftBtn);
+    controls.appendChild(rightBtn);
+
+    card.appendChild(thumbCanvas);
+    card.appendChild(label);
+    card.appendChild(controls);
+
+    framesGrid.appendChild(card);
   });
+}
 
-  fpsSlider.addEventListener('input', (e) => {
-    fpsLabel.textContent = e.target.value;
-    startLoop();
+/* RESALTAR FOTOGRAMA ACTIVO */
+
+function highlightActiveCard() {
+
+  const cards = document.querySelectorAll('.frame-card');
+
+  cards.forEach((card, idx) => {
+
+    card.classList.toggle(
+      'active-frame',
+      idx === currentFrameIndex
+    );
+
   });
+}
+
+/* CAMBIAR ORDEN */
+
+function moveFrame(index, direction) {
+
+  const targetIndex = index + direction;
+
+  if (targetIndex < 0 || targetIndex >= sequence.length) return;
+
+  const temp = sequence[index];
+
+  sequence[index] = sequence[targetIndex];
+  sequence[targetIndex] = temp;
+
+  renderFramesUI();
+  drawMainFrame();
+}
+
+/* RESTABLECER ORDEN */
+
+function resetOrder() {
+
+  sequence = [...emojiAnimations[currentKey].frames];
+
+  currentFrameIndex = 0;
+
+  renderFramesUI();
+  drawMainFrame();
+}
+
+/* DIBUJAR FOTOGRAMA PRINCIPAL */
+
+function drawMainFrame() {
+
+  const pose = sequence[currentFrameIndex];
+
+  renderEmojiPose(
+    mainCtx,
+    mainCanvas.width,
+    mainCanvas.height,
+    pose,
+    85
+  );
+
+  mainCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+
+  mainCtx.fillRect(14, 14, 175, 30);
+
+  mainCtx.fillStyle = '#ffffff';
+
+  mainCtx.font = '600 13px system-ui, sans-serif';
+
+  mainCtx.fillText(
+    `Fotograma ${currentFrameIndex + 1}/12`,
+    24,
+    33
+  );
+}
+
+/* REPRODUCCIÓN */
+
+function startLoop() {
+
+  if (animTimer) clearInterval(animTimer);
+
+  const fps = Number(fpsSlider.value);
+
+  animTimer = setInterval(() => {
+
+    if (!isPlaying) return;
+
+    drawMainFrame();
+
+    highlightActiveCard();
+
+    currentFrameIndex = (currentFrameIndex + 1) % sequence.length;
+
+  }, 1000 / fps);
+}
+
+/* BOTÓN REPRODUCIR / PAUSAR */
+
+function updatePlayButton() {
+
+  if (isPlaying) {
+
+    playPauseBtn.textContent = '⏸ Pausar';
+
+    playPauseBtn.classList.remove('paused');
+
+  } else {
+
+    playPauseBtn.textContent = '▶ Reproducir';
+
+    playPauseBtn.classList.add('paused');
+  }
+}
+
+playPauseBtn.addEventListener('click', () => {
+
+  isPlaying = !isPlaying;
+
+  updatePlayButton();
+
+});
+
+/* CONTROL DE VELOCIDAD */
+
+fpsSlider.addEventListener('input', (e) => {
+
+  fpsLabel.textContent = e.target.value;
+
+  startLoop();
+
+});
+
 </script>
 
 </body>
 </html>
+
