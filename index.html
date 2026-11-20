@@ -32,7 +32,7 @@ body {
   border-radius: 12px;
   border: 1px solid #262626;
   overflow: hidden;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
 }
@@ -712,7 +712,6 @@ const playPauseBtn = document.getElementById('playPauseBtn');
 const fpsSlider = document.getElementById('fpsSlider');
 const fpsLabel = document.getElementById('fpsLabel');
 
-/* Ajusta resolución interna del canvas al DPI real para evitar borrosidad */
 function setupHiDPICanvas(canvas, cssWidth, cssHeight) {
   const dpr = Math.max(window.devicePixelRatio || 1, 2);
   canvas.width = Math.round(cssWidth * dpr);
@@ -839,4 +838,118 @@ function renderFramesUI() {
     const controls = document.createElement('div');
     controls.className = 'order-controls';
 
-    const leftBtn = document
+    const leftBtn = document.createElement('button');
+    leftBtn.className = 'btn-move';
+    leftBtn.innerHTML = '&larr;';
+    leftBtn.title = 'Mover a la izquierda';
+    leftBtn.disabled = index === 0;
+    leftBtn.onclick = () => moveFrame(index, -1);
+
+    const rightBtn = document.createElement('button');
+    rightBtn.className = 'btn-move';
+    rightBtn.innerHTML = '&rarr;';
+    rightBtn.title = 'Mover a la derecha';
+    rightBtn.disabled = index === sequence.length - 1;
+    rightBtn.onclick = () => moveFrame(index, 1);
+
+    controls.appendChild(leftBtn);
+    controls.appendChild(rightBtn);
+
+    card.appendChild(thumbCanvas);
+    card.appendChild(label);
+    card.appendChild(controls);
+
+    framesGrid.appendChild(card);
+  });
+}
+
+function highlightActiveCard() {
+  const cards = document.querySelectorAll('.frame-card');
+  cards.forEach((card, idx) => {
+    card.classList.toggle('active-frame', idx === currentFrameIndex);
+  });
+}
+
+function moveFrame(index, direction) {
+  const targetIndex = index + direction;
+  if (targetIndex < 0 || targetIndex >= sequence.length) return;
+
+  const temp = sequence[index];
+  sequence[index] = sequence[targetIndex];
+  sequence[targetIndex] = temp;
+
+  renderFramesUI();
+  drawMainFrame();
+}
+
+function resetOrder() {
+  sequence = [...emojiAnimations[currentKey].frames];
+  currentFrameIndex = 0;
+  renderFramesUI();
+  drawMainFrame();
+}
+
+function drawMainFrame() {
+  const rect = mainCanvas.getBoundingClientRect();
+  const cssW = Math.max(300, Math.round(rect.width || 680));
+  const cssH = Math.max(180, Math.round(rect.height || 270));
+
+  setupHiDPICanvas(mainCanvas, cssW, cssH);
+
+  const pose = sequence[currentFrameIndex];
+  renderEmojiPose(mainCtx, cssW, cssH, pose, Math.round(cssH * 0.28));
+
+  mainCtx.fillStyle = 'rgba(10, 10, 10, 0.88)';
+  mainCtx.beginPath();
+  mainCtx.roundRect(12, 12, 152, 28, 6);
+  mainCtx.fill();
+
+  mainCtx.fillStyle = '#ffffff';
+  mainCtx.font = '600 12px system-ui, sans-serif';
+  mainCtx.fillText(`Fotograma ${currentFrameIndex + 1}/12`, 22, 30);
+}
+
+function startLoop() {
+  if (animTimer) clearInterval(animTimer);
+
+  const fps = Number(fpsSlider.value);
+
+  animTimer = setInterval(() => {
+    if (!isPlaying) return;
+
+    drawMainFrame();
+    highlightActiveCard();
+
+    currentFrameIndex = (currentFrameIndex + 1) % sequence.length;
+  }, 1000 / fps);
+}
+
+function updatePlayButton() {
+  if (isPlaying) {
+    playPauseBtn.textContent = '⏸ Pausar';
+    playPauseBtn.classList.remove('paused');
+  } else {
+    playPauseBtn.textContent = '▶ Reproducir';
+    playPauseBtn.classList.add('paused');
+  }
+}
+
+playPauseBtn.addEventListener('click', () => {
+  isPlaying = !isPlaying;
+  updatePlayButton();
+});
+
+fpsSlider.addEventListener('input', (e) => {
+  fpsLabel.textContent = e.target.value;
+  startLoop();
+});
+
+window.addEventListener('resize', () => {
+  if (studioView.style.display === 'flex') {
+    drawMainFrame();
+  }
+});
+</script>
+
+</body>
+</html>
