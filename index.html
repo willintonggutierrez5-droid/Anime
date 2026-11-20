@@ -15,24 +15,24 @@
 }
 
 body {
-  background-color: #0f172a;
+  background: #0f172a;
   color: #1e293b;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 30px 20px;
+  align-items: center;
+  padding: 18px;
 }
 
 .app-container {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  overflow: hidden;
   width: 100%;
-  max-width: 1250px;
-  min-height: 650px;
+  max-width: 1050px;
+  min-height: 550px;
   height: auto;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,.35);
   display: flex;
   flex-direction: column;
 }
@@ -42,21 +42,21 @@ body {
 .header-bar {
   background: #1e293b;
   color: white;
-  padding: 20px 28px;
+  padding: 15px 22px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .header-title h1 {
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 700;
 }
 
 .header-title p {
-  font-size: 14px;
+  font-size: 12px;
   color: #94a3b8;
 }
 
@@ -66,121 +66,110 @@ body {
 }
 
 .btn-nav {
-  padding: 9px 15px;
+  display: none;
+  padding: 7px 11px;
   background: #334155;
   color: white;
   border: 1px solid #475569;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: 7px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  display: none;
 }
 
-.btn-nav:hover {
-  background: #475569;
-}
-
-/* HOJA 1: EXPLICACIÓN */
+/* PORTADA */
 
 .intro-view {
-  padding: 55px 40px;
+  flex: 1;
+  padding: 32px 30px;
+  background: #f8fafc;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
   text-align: center;
-  background: #f8fafc;
 }
 
 .intro-badge {
   background: #dbeafe;
   color: #1d4ed8;
-  padding: 7px 16px;
+  padding: 5px 13px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  margin-bottom: 12px;
   text-transform: uppercase;
-  margin-bottom: 18px;
 }
 
 .intro-view h2 {
-  font-size: 29px;
+  font-size: 25px;
   color: #0f172a;
-  max-width: 750px;
+  max-width: 700px;
   line-height: 1.3;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .intro-lead {
-  font-size: 16px;
+  max-width: 730px;
+  font-size: 14px;
   color: #475569;
-  max-width: 850px;
-  line-height: 1.7;
-  margin-bottom: 35px;
+  line-height: 1.55;
+  margin-bottom: 24px;
 }
 
-/* CUADRÍCULA DE PRINCIPIOS */
+/* TARJETAS DE PRINCIPIOS */
 
 .principles-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
-  gap: 20px;
+  gap: 14px;
   width: 100%;
-  max-width: 1050px;
-  margin-bottom: 38px;
+  max-width: 850px;
+  margin-bottom: 25px;
 }
 
 .principle-card {
   background: white;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 24px 20px;
+  border-radius: 11px;
+  padding: 17px 15px;
   text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
   height: 100%;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 .principle-icon {
-  font-size: 30px;
-  margin-bottom: 12px;
-  display: block;
+  font-size: 25px;
+  margin-bottom: 7px;
 }
 
 .principle-card h4 {
-  font-size: 16px;
+  font-size: 14px;
   color: #0f172a;
-  margin-bottom: 10px;
-  line-height: 1.4;
+  margin-bottom: 7px;
+  line-height: 1.35;
 }
 
 .principle-card p {
-  font-size: 14px;
+  font-size: 12px;
   color: #64748b;
-  line-height: 1.65;
+  line-height: 1.55;
   overflow-wrap: break-word;
-  flex-grow: 1;
 }
 
 .btn-start {
-  padding: 15px 35px;
+  padding: 11px 26px;
   background: #2563eb;
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(37,99,235,0.3);
-  transition: all 0.2s;
+  transition: .2s;
 }
 
 .btn-start:hover {
@@ -188,94 +177,89 @@ body {
   transform: translateY(-2px);
 }
 
-/* HOJA 2: SELECTOR */
+/* SELECTOR */
 
 .selector-view {
-  padding: 55px 35px;
+  flex: 1;
+  padding: 38px 28px;
+  background: #f8fafc;
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
   text-align: center;
-  background: #f8fafc;
 }
 
 .selector-view h2 {
-  font-size: 25px;
+  font-size: 22px;
   color: #0f172a;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .selector-view > p {
-  font-size: 15px;
+  font-size: 13px;
   color: #64748b;
-  margin-bottom: 38px;
-  line-height: 1.6;
+  margin-bottom: 28px;
+  line-height: 1.5;
 }
-
-/* TARJETAS DE EMOJIS */
 
 .emoji-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
-  gap: 22px;
+  gap: 17px;
   width: 100%;
-  max-width: 1050px;
+  max-width: 850px;
 }
 
 .emoji-choice-card {
   background: white;
   border: 2px solid #cbd5e1;
-  border-radius: 16px;
-  padding: 32px 24px;
-  cursor: pointer;
-  transition: all 0.25s ease;
+  border-radius: 13px;
+  padding: 22px 17px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  gap: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  gap: 10px;
   height: 100%;
+  cursor: pointer;
+  transition: .25s;
   min-width: 0;
 }
 
 .emoji-choice-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: #2563eb;
-  box-shadow: 0 12px 24px rgba(37,99,235,0.15);
+  box-shadow: 0 9px 18px rgba(37,99,235,.13);
 }
 
 .big-emoji {
-  font-size: 72px;
+  font-size: 58px;
   line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .emoji-choice-card h3 {
-  font-size: 20px;
+  font-size: 17px;
   color: #1e293b;
 }
 
 .emoji-choice-card span {
-  font-size: 14px;
+  font-size: 12px;
   color: #64748b;
-  line-height: 1.65;
-  overflow-wrap: break-word;
+  line-height: 1.55;
   flex-grow: 1;
+  overflow-wrap: break-word;
 }
 
 .btn-select-pill {
-  margin-top: 12px;
-  padding: 10px 20px;
+  margin-top: 6px;
+  padding: 8px 16px;
   background: #eff6ff;
   color: #2563eb;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  transition: all 0.2s;
 }
 
 .emoji-choice-card:hover .btn-select-pill {
@@ -283,7 +267,7 @@ body {
   color: white;
 }
 
-/* HOJA 3: ESTUDIO DE ANIMACIÓN */
+/* ESTUDIO */
 
 .studio-view {
   display: none;
@@ -291,10 +275,8 @@ body {
   flex: 1;
 }
 
-/* FOTOGRAMAS */
-
 .frames-section {
-  padding: 24px 28px;
+  padding: 18px 20px;
   background: #f8fafc;
   border-bottom: 2px solid #e2e8f0;
 }
@@ -303,19 +285,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .section-header h2 {
-  font-size: 16px;
+  font-size: 14px;
   color: #0f172a;
 }
 
 .btn-reset {
-  padding: 8px 14px;
-  font-size: 12px;
+  padding: 6px 10px;
+  font-size: 11px;
   font-weight: 600;
   border: 1px solid #cbd5e1;
   background: white;
@@ -324,111 +306,105 @@ body {
   color: #475569;
 }
 
-.btn-reset:hover {
-  background: #e2e8f0;
-}
-
 .frames-scroll-container {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   overflow-x: auto;
-  padding: 5px 3px 12px;
+  padding-bottom: 8px;
   scrollbar-width: thin;
 }
 
 .frame-card {
   background: white;
   border: 2px solid #cbd5e1;
-  border-radius: 10px;
-  padding: 9px;
-  text-align: center;
-  min-width: 130px;
+  border-radius: 9px;
+  padding: 7px;
+  min-width: 120px;
   flex-shrink: 0;
-  transition: all 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
+  text-align: center;
 }
 
 .frame-card.active-frame {
   border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.18);
 }
 
 .frame-card canvas {
-  width: 114px;
-  height: 80px;
-  background: #ffffff;
+  width: 104px;
+  height: 73px;
+  background: white;
   border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .frame-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: #334155;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 110px;
+  max-width: 105px;
 }
 
 .order-controls {
   display: flex;
   gap: 4px;
-  width: 100%;
   justify-content: center;
 }
 
 .btn-move {
-  padding: 3px 9px;
+  padding: 2px 8px;
   border: 1px solid #cbd5e1;
   background: #f1f5f9;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 11px;
   color: #334155;
 }
 
 .btn-move:hover:not(:disabled) {
   background: #2563eb;
   color: white;
-  border-color: #2563eb;
 }
 
 .btn-move:disabled {
-  opacity: 0.3;
+  opacity: .3;
   cursor: not-allowed;
 }
 
-/* REPRODUCTOR PRINCIPAL */
+/* REPRODUCTOR */
 
 .player-section {
-  padding: 30px 24px;
-  background: #ffffff;
+  padding: 20px;
+  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 13px;
 }
 
 .player-title {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   color: #1e293b;
 }
 
 #mainPlayerCanvas {
   width: 100%;
-  max-width: 750px;
-  height: 340px;
+  max-width: 620px;
+  height: auto;
+  aspect-ratio: 620 / 280;
   border: 2px solid #cbd5e1;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 6px 15px rgba(0,0,0,.05);
 }
 
 .controls-bar {
@@ -436,23 +412,22 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
   background: #f1f5f9;
-  padding: 14px 26px;
-  border-radius: 12px;
+  padding: 10px 20px;
+  border-radius: 10px;
   border: 1px solid #e2e8f0;
 }
 
 .btn-play {
-  padding: 11px 24px;
+  padding: 9px 19px;
   background: #2563eb;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 7px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
 .btn-play:hover {
@@ -466,8 +441,8 @@ body {
 .speed-group {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 7px;
+  font-size: 12px;
   font-weight: 600;
   color: #334155;
 }
@@ -476,7 +451,8 @@ body {
 
 @media (max-width: 750px) {
   body {
-    padding: 12px;
+    padding: 10px;
+    align-items: flex-start;
   }
 
   .app-container {
@@ -486,53 +462,36 @@ body {
   .principles-grid,
   .emoji-cards-grid {
     grid-template-columns: 1fr;
-    max-width: 500px;
+    max-width: 450px;
   }
 
   .intro-view,
   .selector-view {
-    padding: 35px 18px;
-  }
-
-  .intro-view h2 {
-    font-size: 24px;
-  }
-
-  .selector-view h2 {
-    font-size: 21px;
+    padding: 25px 16px;
   }
 
   .header-bar {
+    align-items: flex-start;
     flex-direction: column;
-    align-items: flex-start;
   }
 
-  #mainPlayerCanvas {
-    height: auto;
-    aspect-ratio: 620 / 280;
+  .intro-view h2 {
+    font-size: 22px;
   }
 
-  .frames-section {
-    padding: 18px 14px;
-  }
-
-  .section-header {
-    align-items: flex-start;
+  .selector-view h2 {
+    font-size: 19px;
   }
 }
 
 @media (max-width: 450px) {
   .header-title h1 {
-    font-size: 18px;
-  }
-
-  .nav-actions {
-    flex-wrap: wrap;
+    font-size: 16px;
   }
 
   .controls-bar {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
   }
 
   .speed-group {
@@ -547,8 +506,6 @@ body {
 
 <div class="app-container">
 
-  <!-- CABECERA GLOBAL -->
-
   <div class="header-bar">
     <div class="header-title">
       <h1 id="mainTitle">🎞️ Laboratorio de Animación Secuencial</h1>
@@ -561,7 +518,7 @@ body {
     </div>
   </div>
 
-  <!-- HOJA 1: EXPLICACIÓN -->
+  <!-- PORTADA -->
 
   <div id="introView" class="intro-view">
 
@@ -599,7 +556,7 @@ body {
 
   </div>
 
-  <!-- HOJA 2: SELECTOR -->
+  <!-- SELECTOR -->
 
   <div id="selectorView" class="selector-view">
 
@@ -633,14 +590,14 @@ body {
     </div>
   </div>
 
-  <!-- HOJA 3: ESTUDIO DE ANIMACIÓN -->
+  <!-- ESTUDIO -->
 
   <div id="studioView" class="studio-view">
 
     <div class="frames-section">
 
       <div class="section-header">
-        <h2>🎞️ 12 Fotogramas (Usa &larr; &rarr; para reorganizar la secuencia a tu gusto)</h2>
+        <h2>🎞️ 12 Fotogramas (Usa ← → para reorganizar la secuencia)</h2>
         <button class="btn-reset" onclick="resetOrder()">↺ Restablecer orden original</button>
       </div>
 
@@ -673,13 +630,11 @@ body {
 <script>
 
 const emojiAnimations = {
-
   fire: {
     emoji: '🔥',
     title: '🔥 Llama Danzante (12 Fotogramas)',
     subtitle: 'Principio de Estirar y Encoger aplicado a la energía del fuego',
     hasGround: true,
-
     frames: [
       { name: "1. Chispa", x: 0.50, y: 0.78, scaleX: 0.7, scaleY: 0.7, rot: 0, alpha: 1.0 },
       { name: "2. Creciendo", x: 0.50, y: 0.75, scaleX: 0.9, scaleY: 1.1, rot: -5, alpha: 1.0 },
@@ -701,7 +656,6 @@ const emojiAnimations = {
     title: '🤖 Salto Acrobático (12 Fotogramas)',
     subtitle: 'Principio de Anticipación, Arco parabólico y Amortiguación',
     hasGround: true,
-
     frames: [
       { name: "1. Posición", x: 0.20, y: 0.76, scaleX: 1.0, scaleY: 1.0, rot: 0, alpha: 1.0 },
       { name: "2. Impulso", x: 0.22, y: 0.80, scaleX: 1.3, scaleY: 0.7, rot: -5, alpha: 1.0 },
@@ -723,7 +677,6 @@ const emojiAnimations = {
     title: '🍂 Caída de Hoja (12 Fotogramas)',
     subtitle: 'Principio de Movimiento Ondulatorio y Resistencia al Aire',
     hasGround: true,
-
     frames: [
       { name: "1. Desprende", x: 0.25, y: 0.16, scaleX: 1.0, scaleY: 1.0, rot: -15, alpha: 1.0 },
       { name: "2. Planeo der.", x: 0.42, y: 0.24, scaleX: 1.05, scaleY: 0.95, rot: 25, alpha: 1.0 },
@@ -739,7 +692,6 @@ const emojiAnimations = {
       { name: "12. Reposo", x: 0.48, y: 0.82, scaleX: 1.05, scaleY: 0.9, rot: 0, alpha: 1.0 }
     ]
   }
-
 };
 
 let currentKey = 'fire';
@@ -767,10 +719,7 @@ const playPauseBtn = document.getElementById('playPauseBtn');
 const fpsSlider = document.getElementById('fpsSlider');
 const fpsLabel = document.getElementById('fpsLabel');
 
-/* NAVEGACIÓN */
-
 function goToIntro() {
-
   if (animTimer) clearInterval(animTimer);
 
   mainTitle.textContent = '🎞️ Laboratorio de Animación Secuencial';
@@ -785,7 +734,6 @@ function goToIntro() {
 }
 
 function goToSelector() {
-
   if (animTimer) clearInterval(animTimer);
 
   mainTitle.textContent = '🎭 Estudio de Animación con Emojis';
@@ -800,9 +748,7 @@ function goToSelector() {
 }
 
 function openEmojiStudio(key) {
-
   currentKey = key;
-
   const data = emojiAnimations[key];
 
   sequence = [...data.frames];
@@ -826,17 +772,13 @@ function openEmojiStudio(key) {
   startLoop();
 }
 
-/* DIBUJAR EMOJIS */
-
 function renderEmojiPose(ctx, width, height, pose, baseSize) {
-
   const data = emojiAnimations[currentKey];
 
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, width, height);
 
   if (data.hasGround) {
-
     const groundY = height * 0.86;
 
     ctx.strokeStyle = '#cbd5e1';
@@ -849,33 +791,24 @@ function renderEmojiPose(ctx, width, height, pose, baseSize) {
   }
 
   ctx.save();
-
   ctx.globalAlpha = pose.alpha;
 
   ctx.translate(width * pose.x, height * pose.y);
-
   ctx.rotate((pose.rot * Math.PI) / 180);
-
   ctx.scale(pose.scaleX, pose.scaleY);
 
   ctx.font = `${baseSize}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
-
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
   ctx.fillText(data.emoji, 0, 0);
-
   ctx.restore();
 }
 
-/* CREAR FOTOGRAMAS */
-
 function renderFramesUI() {
-
   framesGrid.innerHTML = '';
 
   sequence.forEach((pose, index) => {
-
     const card = document.createElement('div');
 
     card.className = 'frame-card';
@@ -894,7 +827,6 @@ function renderFramesUI() {
     renderEmojiPose(thumbCtx, 114, 80, pose, 32);
 
     thumbCanvas.onclick = () => {
-
       isPlaying = false;
       updatePlayButton();
 
@@ -919,7 +851,6 @@ function renderFramesUI() {
     leftBtn.innerHTML = '&larr;';
     leftBtn.title = 'Mover a la izquierda';
     leftBtn.disabled = index === 0;
-
     leftBtn.onclick = () => moveFrame(index, -1);
 
     const rightBtn = document.createElement('button');
@@ -928,7 +859,6 @@ function renderFramesUI() {
     rightBtn.innerHTML = '&rarr;';
     rightBtn.title = 'Mover a la derecha';
     rightBtn.disabled = index === sequence.length - 1;
-
     rightBtn.onclick = () => moveFrame(index, 1);
 
     controls.appendChild(leftBtn);
@@ -942,26 +872,15 @@ function renderFramesUI() {
   });
 }
 
-/* RESALTAR FOTOGRAMA ACTIVO */
-
 function highlightActiveCard() {
-
   const cards = document.querySelectorAll('.frame-card');
 
   cards.forEach((card, idx) => {
-
-    card.classList.toggle(
-      'active-frame',
-      idx === currentFrameIndex
-    );
-
+    card.classList.toggle('active-frame', idx === currentFrameIndex);
   });
 }
 
-/* CAMBIAR ORDEN */
-
 function moveFrame(index, direction) {
-
   const targetIndex = index + direction;
 
   if (targetIndex < 0 || targetIndex >= sequence.length) return;
@@ -975,10 +894,7 @@ function moveFrame(index, direction) {
   drawMainFrame();
 }
 
-/* RESTABLECER ORDEN */
-
 function resetOrder() {
-
   sequence = [...emojiAnimations[currentKey].frames];
 
   currentFrameIndex = 0;
@@ -987,10 +903,7 @@ function resetOrder() {
   drawMainFrame();
 }
 
-/* DIBUJAR FOTOGRAMA PRINCIPAL */
-
 function drawMainFrame() {
-
   const pose = sequence[currentFrameIndex];
 
   renderEmojiPose(
@@ -1001,12 +914,10 @@ function drawMainFrame() {
     85
   );
 
-  mainCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-
+  mainCtx.fillStyle = 'rgba(15,23,42,.85)';
   mainCtx.fillRect(14, 14, 175, 30);
 
   mainCtx.fillStyle = '#ffffff';
-
   mainCtx.font = '600 13px system-ui, sans-serif';
 
   mainCtx.fillText(
@@ -1016,20 +927,15 @@ function drawMainFrame() {
   );
 }
 
-/* REPRODUCCIÓN */
-
 function startLoop() {
-
   if (animTimer) clearInterval(animTimer);
 
   const fps = Number(fpsSlider.value);
 
   animTimer = setInterval(() => {
-
     if (!isPlaying) return;
 
     drawMainFrame();
-
     highlightActiveCard();
 
     currentFrameIndex = (currentFrameIndex + 1) % sequence.length;
@@ -1037,44 +943,27 @@ function startLoop() {
   }, 1000 / fps);
 }
 
-/* BOTÓN REPRODUCIR / PAUSAR */
-
 function updatePlayButton() {
-
   if (isPlaying) {
-
     playPauseBtn.textContent = '⏸ Pausar';
-
     playPauseBtn.classList.remove('paused');
-
   } else {
-
     playPauseBtn.textContent = '▶ Reproducir';
-
     playPauseBtn.classList.add('paused');
   }
 }
 
 playPauseBtn.addEventListener('click', () => {
-
   isPlaying = !isPlaying;
-
   updatePlayButton();
-
 });
 
-/* CONTROL DE VELOCIDAD */
-
 fpsSlider.addEventListener('input', (e) => {
-
   fpsLabel.textContent = e.target.value;
-
   startLoop();
-
 });
 
 </script>
 
 </body>
 </html>
-
