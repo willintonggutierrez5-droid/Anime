@@ -24,16 +24,18 @@ body {
   padding: 12px;
 }
 
+/* VENTANA PRINCIPAL: 920 x 450 */
+
 .app-container {
-  width: 100%;
-  max-width: 900px;
-  min-height: 0;
-  height: auto;
+  width: 920px;
+  height: 450px;
+  max-width: 100%;
   max-height: calc(100vh - 24px);
+  min-height: 0;
   background: white;
   border-radius: 12px;
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
   box-shadow: 0 12px 28px rgba(0,0,0,.30);
   display: flex;
   flex-direction: column;
@@ -42,14 +44,16 @@ body {
 /* CABECERA */
 
 .header-bar {
+  flex: 0 0 auto;
   background: #1e293b;
   color: white;
-  padding: 12px 18px;
+  padding: 10px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+  min-height: 53px;
 }
 
 .header-title h1 {
@@ -82,7 +86,9 @@ body {
 /* PORTADA */
 
 .intro-view {
-  padding: 22px 24px;
+  flex: 1 0 auto;
+  min-height: 0;
+  padding: 15px 24px;
   background: #f8fafc;
   display: flex;
   flex-direction: column;
@@ -98,7 +104,7 @@ body {
   border-radius: 20px;
   font-size: 10px;
   font-weight: 700;
-  margin-bottom: 9px;
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 
@@ -107,7 +113,7 @@ body {
   color: #0f172a;
   max-width: 650px;
   line-height: 1.25;
-  margin-bottom: 9px;
+  margin-bottom: 8px;
 }
 
 .intro-lead {
@@ -115,7 +121,7 @@ body {
   font-size: 12px;
   color: #475569;
   line-height: 1.45;
-  margin-bottom: 17px;
+  margin-bottom: 13px;
 }
 
 /* TARJETAS DE PRINCIPIOS */
@@ -127,16 +133,15 @@ body {
   gap: 11px;
   width: 100%;
   max-width: 760px;
-  margin-bottom: 18px;
+  margin-bottom: 13px;
 }
 
 .principle-card {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 9px;
-  padding: 13px 12px;
+  padding: 11px 12px;
   text-align: left;
-  height: 100%;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -181,7 +186,9 @@ body {
 /* SELECTOR */
 
 .selector-view {
-  padding: 24px 22px;
+  flex: 1 0 auto;
+  min-height: 0;
+  padding: 15px 22px;
   background: #f8fafc;
   display: none;
   flex-direction: column;
@@ -199,7 +206,7 @@ body {
 .selector-view > p {
   font-size: 12px;
   color: #64748b;
-  margin-bottom: 19px;
+  margin-bottom: 15px;
   line-height: 1.45;
 }
 
@@ -216,12 +223,11 @@ body {
   background: white;
   border: 2px solid #cbd5e1;
   border-radius: 11px;
-  padding: 17px 13px;
+  padding: 13px 13px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  height: 100%;
+  gap: 7px;
   cursor: pointer;
   transition: .25s;
   min-width: 0;
@@ -234,7 +240,7 @@ body {
 }
 
 .big-emoji {
-  font-size: 48px;
+  font-size: 43px;
   line-height: 1;
   margin-bottom: 3px;
 }
@@ -267,18 +273,25 @@ body {
   color: white;
 }
 
-/* ESTUDIO */
+/* ESTUDIO DE ANIMACIÓN */
 
 .studio-view {
   display: none;
+  flex: 1 0 auto;
+  min-height: 0;
   flex-direction: column;
-  flex: 1;
+  background: #ffffff;
 }
 
+/* SECCIÓN DE FOTOGRAMAS */
+
 .frames-section {
-  padding: 13px 16px;
+  flex: 0 0 119px;
+  min-height: 0;
+  padding: 9px 15px 7px;
   background: #f8fafc;
   border-bottom: 2px solid #e2e8f0;
+  overflow: hidden;
 }
 
 .section-header {
@@ -287,7 +300,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 7px;
-  margin-bottom: 9px;
+  margin-bottom: 7px;
 }
 
 .section-header h2 {
@@ -310,7 +323,8 @@ body {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 3px 2px 8px;
+  overflow-y: hidden;
+  padding: 3px 2px 7px;
   scrollbar-width: thin;
 }
 
@@ -318,13 +332,13 @@ body {
   background: white;
   border: 2px solid #cbd5e1;
   border-radius: 8px;
-  padding: 6px;
+  padding: 5px;
   min-width: 108px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   text-align: center;
 }
 
@@ -335,7 +349,7 @@ body {
 
 .frame-card canvas {
   width: 94px;
-  height: 66px;
+  height: 60px;
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 5px;
@@ -382,26 +396,30 @@ body {
 /* REPRODUCTOR */
 
 .player-section {
-  padding: 15px 16px;
+  flex: 1 0 auto;
+  min-height: 0;
+  padding: 7px 12px 9px;
   background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 6px;
+  overflow: hidden;
 }
 
 .player-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: #1e293b;
 }
 
-/* Canvas de 750 x 360 píxeles, adaptable */
+/* Canvas adaptado al tamaño de la ventana */
 
 #mainPlayerCanvas {
   display: block;
   width: 100%;
-  max-width: 750px;
+  max-width: 440px;
   height: auto;
   aspect-ratio: 750 / 360;
   border: 2px solid #cbd5e1;
@@ -417,7 +435,7 @@ body {
   align-items: center;
   gap: 11px;
   background: #f1f5f9;
-  padding: 8px 15px;
+  padding: 6px 13px;
   border-radius: 9px;
   border: 1px solid #e2e8f0;
 }
@@ -450,7 +468,7 @@ body {
   color: #334155;
 }
 
-/* RESPONSIVE */
+/* PANTALLAS PEQUEÑAS */
 
 @media (max-width: 750px) {
   body {
@@ -459,6 +477,7 @@ body {
   }
 
   .app-container {
+    width: 100%;
     max-height: calc(100vh - 16px);
   }
 
@@ -493,6 +512,22 @@ body {
   .emoji-choice-card {
     padding: 15px 12px;
   }
+
+  .studio-view {
+    overflow: visible;
+  }
+
+  .frames-section {
+    flex-basis: 119px;
+  }
+
+  .player-section {
+    padding: 12px 9px;
+  }
+
+  #mainPlayerCanvas {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 450px) {
@@ -520,6 +555,10 @@ body {
 
   .section-header h2 {
     font-size: 11px;
+  }
+
+  .section-header {
+    align-items: flex-start;
   }
 }
 </style>
@@ -742,6 +781,8 @@ const playPauseBtn = document.getElementById('playPauseBtn');
 const fpsSlider = document.getElementById('fpsSlider');
 const fpsLabel = document.getElementById('fpsLabel');
 
+/* NAVEGACIÓN */
+
 function goToIntro() {
   if (animTimer) clearInterval(animTimer);
 
@@ -754,6 +795,8 @@ function goToIntro() {
   selectorView.style.display = 'none';
   studioView.style.display = 'none';
   introView.style.display = 'flex';
+
+  document.querySelector('.app-container').scrollTop = 0;
 }
 
 function goToSelector() {
@@ -768,6 +811,8 @@ function goToSelector() {
   introView.style.display = 'none';
   studioView.style.display = 'none';
   selectorView.style.display = 'flex';
+
+  document.querySelector('.app-container').scrollTop = 0;
 }
 
 function openEmojiStudio(key) {
@@ -790,10 +835,14 @@ function openEmojiStudio(key) {
   selectorView.style.display = 'none';
   studioView.style.display = 'flex';
 
+  document.querySelector('.app-container').scrollTop = 0;
+
   renderFramesUI();
   drawMainFrame();
   startLoop();
 }
+
+/* DIBUJO DE LOS EMOJIS */
 
 function renderEmojiPose(ctx, width, height, pose, baseSize) {
   const data = emojiAnimations[currentKey];
@@ -827,6 +876,8 @@ function renderEmojiPose(ctx, width, height, pose, baseSize) {
   ctx.fillText(data.emoji, 0, 0);
   ctx.restore();
 }
+
+/* MINIATURAS DE LOS FOTOGRAMAS */
 
 function renderFramesUI() {
   framesGrid.innerHTML = '';
@@ -895,6 +946,8 @@ function renderFramesUI() {
   });
 }
 
+/* RESALTAR FOTOGRAMA ACTIVO */
+
 function highlightActiveCard() {
   const cards = document.querySelectorAll('.frame-card');
 
@@ -902,6 +955,8 @@ function highlightActiveCard() {
     card.classList.toggle('active-frame', idx === currentFrameIndex);
   });
 }
+
+/* REORGANIZAR FOTOGRAMAS */
 
 function moveFrame(index, direction) {
   const targetIndex = index + direction;
@@ -912,6 +967,8 @@ function moveFrame(index, direction) {
 
   sequence[index] = sequence[targetIndex];
   sequence[targetIndex] = temp;
+
+  currentFrameIndex = targetIndex;
 
   renderFramesUI();
   drawMainFrame();
@@ -926,8 +983,12 @@ function resetOrder() {
   drawMainFrame();
 }
 
+/* REPRODUCTOR PRINCIPAL */
+
 function drawMainFrame() {
   const pose = sequence[currentFrameIndex];
+
+  if (!pose) return;
 
   renderEmojiPose(
     mainCtx,
@@ -950,13 +1011,15 @@ function drawMainFrame() {
   );
 }
 
+/* ANIMACIÓN EN BUCLE */
+
 function startLoop() {
   if (animTimer) clearInterval(animTimer);
 
   const fps = Number(fpsSlider.value);
 
   animTimer = setInterval(() => {
-    if (!isPlaying) return;
+    if (!isPlaying || sequence.length === 0) return;
 
     drawMainFrame();
     highlightActiveCard();
@@ -965,6 +1028,8 @@ function startLoop() {
 
   }, 1000 / fps);
 }
+
+/* BOTÓN DE REPRODUCCIÓN */
 
 function updatePlayButton() {
   if (isPlaying) {
@@ -979,7 +1044,13 @@ function updatePlayButton() {
 playPauseBtn.addEventListener('click', () => {
   isPlaying = !isPlaying;
   updatePlayButton();
+
+  if (isPlaying) {
+    drawMainFrame();
+  }
 });
+
+/* CONTROL DE VELOCIDAD */
 
 fpsSlider.addEventListener('input', (e) => {
   fpsLabel.textContent = e.target.value;
